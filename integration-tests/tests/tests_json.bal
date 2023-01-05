@@ -68,6 +68,7 @@ public function testPrintDebugJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 13, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], "\", \"level\":\"DEBUG\", \"module\":\"\", \"message\":\"debug log\"}");
@@ -89,6 +90,7 @@ public function testPrintErrorJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 13, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], "\", \"level\":\"ERROR\", \"module\":\"\", \"message\":\"error log\"}");
@@ -110,6 +112,7 @@ public function testPrintInfoJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 13, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], "\", \"level\":\"INFO\", \"module\":\"\", \"message\":\"info log\"}");
@@ -131,6 +134,7 @@ public function testPrintWarnJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 13, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], "\", \"level\":\"WARN\", \"module\":\"\", \"message\":\"warn log\"}");
@@ -152,6 +156,7 @@ public function testErrorLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 6, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_JSON);
@@ -166,6 +171,7 @@ public function testWarnLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 7, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_JSON);
@@ -181,6 +187,7 @@ public function testInfoLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 8, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_JSON);
@@ -197,6 +204,7 @@ public function testDebugLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 9, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_JSON);
@@ -215,6 +223,7 @@ public function testProjectWithoutLogLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 14, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_MAIN_JSON);
@@ -238,6 +247,7 @@ public function testProjectWithGlobalLogLevelJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 11, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_MAIN_JSON);
@@ -251,7 +261,7 @@ public function testProjectWithGlobalLogLevelJson() returns error? {
 @test:Config {}
 public function testProjectWithGlobalAndDefualtPackageLogLevelJson() returns error? {
     Process|error execResult = exec(bal_exec_path, {BAL_CONFIG_FILES: CONFIG_PROJECT_GLOBAL_AND_DEFAULT_PACKAGE_LEVEL_JSON},
-     (), "run", temp_dir_path + "/log-project");
+    (), "run", temp_dir_path + "/log-project");
     Process result = check execResult;
     int _ = check result.waitForExit();
     int _ = check result.exitCode();
@@ -279,6 +289,7 @@ public function testProjectWithGlobalAndModuleLogLevelsJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 12, INCORRECT_NUMBER_OF_LINES);
     validateLogJson(logLines[5], MESSAGE_ERROR_MAIN_JSON);
@@ -300,6 +311,7 @@ public function testObservabilityJson() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 9, INCORRECT_NUMBER_OF_LINES);
 

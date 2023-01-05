@@ -31,6 +31,7 @@ public function testGlobalLogLevelNegative() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 6, INCORRECT_NUMBER_OF_LINES);
     test:assertTrue(logLines[5].includes("error: invalid log level: debug"), "global log level is not validated");
@@ -45,6 +46,7 @@ public function testModuleLogLevelNegative() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 6, INCORRECT_NUMBER_OF_LINES);
     test:assertTrue(logLines[5].includes("error: invalid log level: debug for module: myorg/myproject.foo"), "module log level is not validated");
@@ -59,6 +61,7 @@ public function testSetOutputFileNegative() returns error? {
     io:ReadableByteChannel readableResult = result.stderr();
     io:ReadableCharacterChannel sc = new (readableResult, UTF_8);
     string outText = check sc.read(100000);
+    test:assertEquals(outText, "");
     string[] logLines = regex:split(outText, "\n");
     test:assertEquals(logLines.length(), 6, INCORRECT_NUMBER_OF_LINES);
     test:assertTrue(logLines[5].includes("error: The given path is not valid. Should be a file with .log extension."), "module log level is not validated");
